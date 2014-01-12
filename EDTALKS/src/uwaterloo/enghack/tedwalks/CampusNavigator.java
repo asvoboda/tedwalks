@@ -193,7 +193,7 @@ public final class CampusNavigator{
 			lastType="direct";
 		}
 		Collections.reverse(ret);
-		return Collections.unmodifiableList(ret);
+		return ret;
 	}
 	public static void main(String[]args){
 		final List<Building>buildings=getBuildings();

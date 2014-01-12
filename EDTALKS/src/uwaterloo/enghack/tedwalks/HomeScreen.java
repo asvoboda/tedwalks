@@ -89,13 +89,18 @@ public class HomeScreen extends Activity implements OnItemSelectedListener {
 		final OnItemSelectedListener updateListener=new OnItemSelectedListener(){
 			@Override public void onItemSelected(AdapterView<?> viewParent,View view,int pos,long id){
 				Floor from=(Floor)fromFloorSpinner.getSelectedItem(),to=(Floor)toFloorSpinner.getSelectedItem();
-				final List<Direction>path=CampusNavigator.getPath(from,to);
+				List<Direction>path=CampusNavigator.getPath(from,to);
 				if(path==null){
 					Spannable sp=Spannable.Factory.getInstance().newSpannable("Sorry, path not found!");
 					sp.setSpan(new ForegroundColorSpan(Color.RED), 0,sp.length(),0);
 					directionsList.setAdapter(new ArrayAdapter<CharSequence>(HomeScreen.this,android.R.layout.simple_list_item_1,new Spannable[]{sp}));
 					return;
 				}
+				
+				for(int i = 0; i < path.size(); i++) // only show when building changes
+					if(path.get(i).a.getShortName().equals(path.get(i).b.getShortName()))
+						path.remove(i);
+				
 				final Spannable[]sp=new Spannable[path.size()];
 				for(int i=0;i<path.size();++i){
 					final Direction d=path.get(i);
