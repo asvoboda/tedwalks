@@ -1,10 +1,7 @@
 package uwaterloo.enghack.tedwalks;
 
-import uwaterloo.enghack.tedwalks.R;
 import android.app.Activity;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.widget.Toast;
 
 public class TouchImageViewActivity extends Activity {
     /** Called when the activity is first created. */

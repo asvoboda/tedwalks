@@ -5,10 +5,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import android.os.Bundle;
+import uwaterloo.enghack.tedwalks.CampusNavigator.Building;
+import uwaterloo.enghack.tedwalks.CampusNavigator.Direction;
+import uwaterloo.enghack.tedwalks.CampusNavigator.Floor;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,14 +23,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import uwaterloo.enghack.tedwalks.R;
-import uwaterloo.enghack.tedwalks.CampusNavigator.Building;
-import uwaterloo.enghack.tedwalks.CampusNavigator.Direction;
-import uwaterloo.enghack.tedwalks.CampusNavigator.Floor;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
-import android.util.Log;
-import android.graphics.Color;
 
 
 public class HomeScreen extends Activity implements OnItemSelectedListener {
@@ -97,9 +95,9 @@ public class HomeScreen extends Activity implements OnItemSelectedListener {
 					return;
 				}
 				
-				for(int i = 0; i < path.size(); i++) // only show when building changes
-					if(path.get(i).a.getShortName().equals(path.get(i).b.getShortName()))
-						path.remove(i);
+				for(int i = 0; i < path.size() - 1; i++) // remove redudant floor changing steps
+                    if(path.get(i).a.getShortName().equals(path.get(i + 1).b.getShortName()))
+                            path.remove(i);
 				
 				final Spannable[]sp=new Spannable[path.size()];
 				for(int i=0;i<path.size();++i){
